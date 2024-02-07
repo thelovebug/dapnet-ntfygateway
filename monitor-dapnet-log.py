@@ -46,9 +46,9 @@ def getCurrentDate():
 def waitForTodaysFileToExist(filename, currentDate):
 
   fileExists = False
-  checkCurrentDate = "9999-12-31"
+  checkCurrentDate = getCurrentDate()
   
-  while checkCurrentDate != currentDate and not fileExists:
+  while checkCurrentDate == currentDate and not fileExists:
   
     fileExists = os.path.exists(filename)
     time.sleep(1)
@@ -142,9 +142,7 @@ def infoMessage(infotype, **kwargs):
   message["type"] = "I"
   send = False
 
-  match infotype:
-    
-    case "online":
+  if infotype == "online":
 
       message["subject"] = "DAPNET ntfy pager online"
       message["body"] = "Monitoring for DAPNET calls"
@@ -152,13 +150,17 @@ def infoMessage(infotype, **kwargs):
       message["priority"] = 3
       send = True
 
-    case "logfile":
+  elif infotype == "logfile":
   
       message["subject"] = "Monitoring logfile"
       message["body"] = logfile
       message["tags"] = "floppy_disk, ntfy, logfile"
       message["priority"] = 1
       send = True
+
+  else:
+
+      print("invalid infotype")
 
 
   if send:
