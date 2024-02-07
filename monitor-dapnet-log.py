@@ -170,11 +170,9 @@ def infoMessage(infotype, **kwargs):
 
 def sendMessage(message):
 
-
   print(message)
   
   for profile in settings["profiles"]:
-    print(settings["profiles"][profile])
 
     isAddressableToTargetProfile = False
     isTargetProfileEnabled = False
@@ -191,6 +189,8 @@ def sendMessage(message):
           message["text"].upper().find(settings["profiles"][profile]["call"]) >= 0
           and
           settings["profiles"][profile]["alertoncall"] 
+          and
+          message["ric"] != "0000008"
           ) \
       or message["type"] in ["I", "E"]:
         
@@ -200,10 +200,8 @@ def sendMessage(message):
       isTargetProfileEnabled = True
 
     if isAddressableToTargetProfile == True and isTargetProfileEnabled == True and message["ric"] != "0000008":
+      print(settings["profiles"][profile])
       sendToNtfy(message, settings["profiles"][profile]["endpoint"])
-
-    
-
 
 
   
