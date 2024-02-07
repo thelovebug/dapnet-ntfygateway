@@ -199,7 +199,7 @@ def sendMessage(message):
     if settings["profiles"][profile]["enabled"]:
       isTargetProfileEnabled = True
 
-    if isAddressableToTargetProfile == True and isTargetProfileEnabled == True:
+    if isAddressableToTargetProfile == True and isTargetProfileEnabled == True and message["ric"] != "0000008":
       sendToNtfy(message, settings["profiles"][profile]["endpoint"])
 
     
