@@ -1,6 +1,6 @@
 import re
 import requests
-
+import time
 
 def extract_message(message_text, settings):
     '''
@@ -79,6 +79,10 @@ def send_to_ntfy(message, endpoint):
                              headers=ntfy_headers)
 
     response_text = str(response.status_code)
+    
+    # Gonna wait a second so we don't end up with multiple messages racing each other
+    time.sleep(1)
+
 
     print(f"[{response_text}]")
 
