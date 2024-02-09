@@ -15,6 +15,7 @@ def extract_message(message_text, settings):
     matches = pattern.findall(message_text)
 
     message = {}
+    message["type"] = "X"
 
     if matches:
 

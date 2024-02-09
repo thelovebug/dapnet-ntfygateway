@@ -63,7 +63,8 @@ if __name__ == "__main__":
                     # Get the message details out of the log line
                     message = func_messages.extract_message(line, settings)
                     # Send the message out (if appropriate)
-                    func_messages.send_message(message, settings)
+                    if message["type"] != "X":
+                        func_messages.send_message(message, settings)
 
         # Because, at this point, we'd be looking for a new file, we
         # don't want to skip to the end of it so we get everything from the start
