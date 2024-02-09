@@ -1,0 +1,26 @@
+{
+    "logfile": {
+        "path": "/var/log/pi-star/",
+        "format": "DAPNETGateway-{date}.log"
+    },
+    "regex": {
+        "error": "^E: ([0-9 :-]{19})[.][0-9]{3} (.*)$",
+        "message": "^M: ([0-9 :-]{19}).*Sending message .*([0-9]{7}).*\"([^\"]+)\"$",
+        "debug": "^D: ([0-9 :-]{19}).*Queueing message .*([0-9]{7}).*\"([^\"]+)\"$"
+    },
+    "profiles": {
+        "anyname": {
+            "ric": "your-ric",
+            "call": "your-callsign",
+            "endpoint": "your-ntfy-endpoint",
+            "enabled": true,
+            "alertoncall": true,
+            "messagetypes": [
+                "M",
+                "E",
+                "I",
+                "D"
+            ]
+        }
+    }
+}
