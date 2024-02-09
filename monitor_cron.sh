@@ -2,7 +2,7 @@ cd $(dirname "$0")
 
 SCRIPTLOCATION=$(pwd)
 
-croncmd="$SCRIPTLOCATION/dapnet-ntfygateway.py"
+croncmd="$SCRIPTLOCATION/dapnet_ntfygateway.py"
 cronjob="@reboot $croncmd"
 
 case $1 in
