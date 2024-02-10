@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [[ $(screen -ls | grep -c dapnet-ntfygateway) = 1 ]]; then
     screen -X -S dapnet-ntfygateway quit

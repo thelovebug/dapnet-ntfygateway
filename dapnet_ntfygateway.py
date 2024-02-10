@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
-import func_messages
 import func_general
+import func_messages
 
 settings = {}
 

@@ -5,9 +5,9 @@ import time
 
 
 def get_settings(json_file):
-    '''
+    """
     Loads the specified settings file into a dictionary
-    '''
+    """
 
     with open(json_file) as settings_file:
         file_contents = settings_file.read()
@@ -16,9 +16,9 @@ def get_settings(json_file):
 
 
 def follow(thefile, seek_to_end, current_date):
-    '''
+    """
     Generator function that yields new lines in a file
-    '''
+    """
     # seek the end of the file
 
     # Seek to the end of the file. But only on the first file of the run.
@@ -47,20 +47,20 @@ def follow(thefile, seek_to_end, current_date):
 
 
 def get_current_date():
-    '''
+    """
     Very simply, gets the current (local) date in ISO8601 format
-    '''
-    return datetime.date.today().strftime('%Y-%m-%d')
+    """
+    return datetime.date.today().strftime("%Y-%m-%d")
 
 
 def wait_for_todays_file(filename, current_date):
-    '''
-    This is essentially a wrapper around os.path.exists, 
+    """
+    This is essentially a wrapper around os.path.exists,
     but rather than returning a value immediately, it sits
     and waits until the file eventually arrives.
 
     If it spills over to the next day, the function returns False.u
-    '''
+    """
 
     file_exists = False
     check_current_date = get_current_date()
