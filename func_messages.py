@@ -1,14 +1,16 @@
 import re
-import requests
 import time
 
+import requests
+
+
 def extract_message(message_text, settings):
-    '''
+    """
     This takes a raw line from the DAPNETGateway logfile that we're
     currently monitoring, and if it recognises is as one of the message
     types we're looking for, extracts the pertinent data into a more
     structured format via the message dictionary, which is returned.
-    '''
+    """
 
     # Checking for Message
     pattern = re.compile(settings["regex"]["message"])
@@ -65,9 +67,9 @@ def extract_message(message_text, settings):
 
 
 def send_to_ntfy(message, endpoint):
-    '''
+    """
     Send the message, defined in the message dictionary, to the ntf.sh service
-    '''
+    """
 
     ntfy_headers = {}
 
@@ -75,25 +77,22 @@ def send_to_ntfy(message, endpoint):
     ntfy_headers["Priority"] = str(message["priority"])
     ntfy_headers["Title"] = message["subject"]
 
-    response = requests.post(endpoint,
-                             data=message["body"],
-                             headers=ntfy_headers)
+    response = requests.post(endpoint, data=message["body"], headers=ntfy_headers)
 
     response_text = str(response.status_code)
-    
+
     # Gonna wait a second so we don't end up with multiple messages racing each other
     time.sleep(1)
-
 
     print(f"[{response_text}]")
 
 
 def info_message(infotype, settings, **kwargs):
-    '''
+    """
     A special function for crafting informational messages.
     These are static, and defined by the infotype parameter
-    '''
-    logfile = kwargs.get('optional', None)
+    """
+    logfile = kwargs.get("optional", None)
 
     message = {}
 
@@ -135,11 +134,11 @@ def info_message(infotype, settings, **kwargs):
 
 
 def send_message(message, settings):
-    '''
+    """
     This function prepares the message for sending, and applies
     a series of rules to determine whether the message should be
     sent out of not.  If it deems that it should, it does!
-    '''
+    """
 
     print(message)
 
@@ -155,14 +154,18 @@ def send_message(message, settings):
         #     z. the message type is I (information) or E (error)
         if message["type"] in settings["profiles"][profile]["messagetypes"]:
 
-            if message["ric"] == settings["profiles"][profile]["ric"] \
-                    or (
-                        message["text"].upper().find(
-                            settings["profiles"][profile]["call"].upper()) >= 0
-                        and settings["profiles"][profile]["alertoncall"]
-                        and message["ric"] != "0000008"
-            ) \
-                    or message["type"] in ["I", "E"]:
+            if (
+                message["ric"] == settings["profiles"][profile]["ric"]
+                or (
+                    message["text"]
+                    .upper()
+                    .find(settings["profiles"][profile]["call"].upper())
+                    >= 0
+                    and settings["profiles"][profile]["alertoncall"]
+                    and message["ric"] != "0000008"
+                )
+                or message["type"] in ["I", "E"]
+            ):
                 is_addressable_to_target_profile = True
 
         # The rule here is much simpler: is the profile that we want to send to actually enabled?
@@ -170,6 +173,9 @@ def send_message(message, settings):
             is_target_profile_enabled = True
 
         # If the message is ready to be sent AND the target profile is enabled, then send the message!
-        if is_addressable_to_target_profile == True and is_target_profile_enabled == True:
+        if (
+            is_addressable_to_target_profile == True
+            and is_target_profile_enabled == True
+        ):
             print(settings["profiles"][profile])
             send_to_ntfy(message, settings["profiles"][profile]["endpoint"])

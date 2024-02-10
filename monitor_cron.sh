@@ -1,9 +1,12 @@
+#!/usr/bin/env bash
+
 cd $(dirname "$0")
 
 SCRIPTLOCATION=$(pwd)
 
 croncmd="$SCRIPTLOCATION/monitor_start.sh"
 cronjob="@reboot $croncmd"
+
 
 case $1 in
 add)
