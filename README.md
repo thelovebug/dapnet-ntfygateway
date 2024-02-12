@@ -30,7 +30,11 @@ You'll need SSH access to your MMDVM node. Start off by making sure you have the
 If you use Ubuntu or another Debian based Linux distribution:
 
 ```shell
-sudo apt install git python3 screen
+sudo apt update
+```
+
+```shell
+sudo apt install git python3 python3-venv screen
 ```
 
 It's likely you'll already have `python3` installed, but it doesn't hurt to check.  It's also kinda necessary.
@@ -58,7 +62,7 @@ cd dapnet-ntfygateway
 Set up the environment to run it and download dependencies:
 
 ```shell
-python -m venv venv
+python3 -m venv venv
 ```
 
 ```shell

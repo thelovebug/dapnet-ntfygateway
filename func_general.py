@@ -48,9 +48,9 @@ def follow(thefile, seek_to_end, current_date):
 
 def get_current_date():
     """
-    Very simply, gets the current (local) date in ISO8601 format
+    Very simply, gets the current (UTC) date in ISO8601 format
     """
-    return datetime.date.today().strftime("%Y-%m-%d")
+    return datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y-%m-%d")
 
 
 def wait_for_todays_file(filename, current_date):
