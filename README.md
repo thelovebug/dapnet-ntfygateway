@@ -48,7 +48,7 @@ cd ~/git
 ```
 
 ```shell
-git clone <https://github.com/thelovebug/dapnet-ntfygateway>
+git clone https://github.com/thelovebug/dapnet-ntfygateway
 ```
 
 ```shell
