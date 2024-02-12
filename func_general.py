@@ -46,14 +46,14 @@ def follow(thefile: str, seek_to_end, current_date: str):
         yield line
 
 
-def get_current_date() -> None:
+def get_current_date() -> str:
     """
     Very simply, gets the current (UTC) date in ISO8601 format
     """
     return datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y-%m-%d")
 
 
-def wait_for_todays_file(filename: str, current_date: str) -> None:
+def wait_for_todays_file(filename: str, current_date: str) -> str | bool:
     """
     This is essentially a wrapper around os.path.exists,
     but rather than returning a value immediately, it sits
