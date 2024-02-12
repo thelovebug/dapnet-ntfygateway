@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"Main function, where the magic happens! :)"
 
 import func_general
 import func_messages
@@ -43,7 +44,7 @@ if __name__ == "__main__":
         if file_exists:
 
             # Open the file for reading
-            with open(filename, "r") as logfile:
+            with open(filename, "r", encoding="UTF-8") as logfile:
 
                 # Create the generator
                 loglines = func_general.follow(logfile, seek_to_end, current_date)
