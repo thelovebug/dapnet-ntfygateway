@@ -104,15 +104,21 @@ You're ready to go!
 To kick the script off, enter the following command:
 
 ``` shell
-./monitor_start.sh
+./monitor_helper.sh start
 ```
 
-This will start the process in a detached `screen` session.  If you want to know if it's still running, I may make a better invocation tool in the future.  For now, just run the same script again and it'll tell you if it's still running.
+This will start the process in a detached `screen` session.
 
 If you want to make sure that this script starts on boot, then use the following command:
 
 ```shell
-./monitor_cron add
+./monitor_helper.sh enable
+```
+
+If you want to know if the script is running, or if the script is set to start on boot, use the following command:
+
+```shell
+./monitor_helper.sh status
 ```
 
 Good luck, and reach out to me (via [QRZ](https://qrz.com/db/M7TLB)) if you have any issues.
@@ -125,4 +131,4 @@ Good luck, and reach out to me (via [QRZ](https://qrz.com/db/M7TLB)) if you have
 * Expand the informational message scope to include DAPNET network connection status
 * Profit!!
 
-_(only joking on that last bit, this project was made with ❤ by Dave [M7TLB](https://qrz.com/db/M7TLB) in South Yorkshire, UK)
+_(only joking on that last bit, this project was made with ❤ by Dave [M7TLB](https://qrz.com/db/M7TLB) in South Yorkshire, UK)_

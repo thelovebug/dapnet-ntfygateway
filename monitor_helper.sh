@@ -9,7 +9,7 @@ cronjob="@reboot $croncmd"
 
 case $1 in
 
-mkcron)
+enable)
 
     crontab -l | grep -F -i -v "$croncmd" | {
         cat
@@ -17,7 +17,7 @@ mkcron)
     } | crontab -
     ;;
 
-rmcron)
+disable)
 
     crontab -l | grep -F -i -v "$croncmd" | crontab -
     ;;
@@ -43,15 +43,15 @@ stop)
 status)
 
     if [[ $(screen -ls | grep -F -i -c dapnet-ntfygateway) = 1 ]]; then
-        echo "ntfygateway: running"
+        echo "script is:        RUNNING"
     else
-        echo "ntfygateway: stopped"
+        echo "script is:        STOPPED"
     fi
 
     if [[ $(crontab -l | grep -F -i -c "$croncmd") = 1 ]]; then
-        echo "crontab:     present"
+        echo "start on boot is: ENABLED"
     else
-        echo "crontab:     not present"
+        echo "start on boot is: DISABLED"
     fi
     ;;
 
