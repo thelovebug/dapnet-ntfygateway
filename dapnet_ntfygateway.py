@@ -32,8 +32,7 @@ if __name__ == "__main__":
         # Send informational message that we're waiting for the logfile
         func_messages.info_message("logfile_waiting", settings, optional=filename)
 
-        # Sit here and wait until the file actually exists
-        #     (or the current date changes again)
+        # Sit here and wait until the file actually exists (or the current date changes again)
         file_exists = func_general.wait_for_todays_file(filename, current_date)
 
         # Send informational message that we're monitoring the logfile
