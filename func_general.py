@@ -1,10 +1,11 @@
 import datetime
+import io
 import json
 import os
 import time
 
 
-def get_settings(json_file):
+def get_settings(json_file: str) -> dict:
     """
     Loads the specified settings file into a dictionary
     """
@@ -15,7 +16,7 @@ def get_settings(json_file):
     return json.loads(file_contents)
 
 
-def follow(thefile: str, seek_to_end, current_date: str):
+def follow(thefile: io.TextIOWrapper, seek_to_end: bool, current_date: str):
     """
     Generator function that yields new lines in a file
     """
@@ -53,7 +54,7 @@ def get_current_date() -> str:
     return datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y-%m-%d")
 
 
-def wait_for_todays_file(filename: str, current_date: str) -> str | bool:
+def wait_for_todays_file(filename: str, current_date: str) -> bool:
     """
     This is essentially a wrapper around os.path.exists,
     but rather than returning a value immediately, it sits

@@ -90,7 +90,7 @@ def send_to_ntfy(message: dict, endpoint: str) -> None:
     print(f"[{response_text}]")
 
 
-def info_message(infotype: str, settings: str, **kwargs) -> None:
+def info_message(infotype: str, settings: dict, **kwargs) -> None:
     """
     A special function for crafting informational messages.
     These are static, and defined by the infotype parameter
@@ -136,7 +136,7 @@ def info_message(infotype: str, settings: str, **kwargs) -> None:
         send_message(message, settings)
 
 
-def send_message(message: str, settings: dict) -> None:
+def send_message(message: dict, settings: dict) -> None:
     """
     This function prepares the message for sending, and applies
     a series of rules to determine whether the message should be
