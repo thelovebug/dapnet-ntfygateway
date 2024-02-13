@@ -9,13 +9,13 @@ def get_settings(json_file):
     Loads the specified settings file into a dictionary
     """
 
-    with open(json_file) as settings_file:
+    with open(json_file, encoding="UTF-8") as settings_file:
         file_contents = settings_file.read()
 
     return json.loads(file_contents)
 
 
-def follow(thefile, seek_to_end, current_date):
+def follow(thefile: str, seek_to_end, current_date: str):
     """
     Generator function that yields new lines in a file
     """
@@ -46,14 +46,14 @@ def follow(thefile, seek_to_end, current_date):
         yield line
 
 
-def get_current_date():
+def get_current_date() -> str:
     """
     Very simply, gets the current (UTC) date in ISO8601 format
     """
     return datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y-%m-%d")
 
 
-def wait_for_todays_file(filename, current_date):
+def wait_for_todays_file(filename: str, current_date: str) -> str | bool:
     """
     This is essentially a wrapper around os.path.exists,
     but rather than returning a value immediately, it sits
