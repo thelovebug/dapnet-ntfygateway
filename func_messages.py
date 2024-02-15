@@ -1,4 +1,5 @@
-"Function to handle the messages"
+"""This module holds functions to handle the messages"""
+
 import re
 import time
 
@@ -6,11 +7,17 @@ import requests
 
 
 def extract_message(message_text: str, settings: dict) -> dict:
-    """
-    This takes a raw line from the DAPNETGateway logfile that we're
+    """This takes a raw line from the DAPNETGateway logfile that we're
     currently monitoring, and if it recognises is as one of the message
     types we're looking for, extracts the pertinent data into a more
     structured format via the message dictionary, which is returned.
+
+    Args:
+        message_text (str): _description_
+        settings (dict): _description_
+
+    Returns:
+        dict: _description_
     """
 
     # Checking for Message
@@ -68,8 +75,11 @@ def extract_message(message_text: str, settings: dict) -> dict:
 
 
 def send_to_ntfy(message: dict, endpoint: str) -> None:
-    """
-    Send the message, defined in the message dictionary, to the ntf.sh service
+    """Send the message, defined in the message dictionary, to the ntf.sh service.
+
+    Args:
+        message (dict): _description_
+        endpoint (str): _description_
     """
 
     ntfy_headers = {}
@@ -91,10 +101,14 @@ def send_to_ntfy(message: dict, endpoint: str) -> None:
 
 
 def info_message(infotype: str, settings: dict, **kwargs) -> None:
+    """A special function for crafting informational messages.
+    These are static, and defined by the infotype parameter.
+
+    Args:
+        infotype (str): _description_
+        settings (dict): _description_
     """
-    A special function for crafting informational messages.
-    These are static, and defined by the infotype parameter
-    """
+
     logfile = kwargs.get("optional", None)
 
     message = {}
@@ -137,10 +151,13 @@ def info_message(infotype: str, settings: dict, **kwargs) -> None:
 
 
 def send_message(message: dict, settings: dict) -> None:
-    """
-    This function prepares the message for sending, and applies
+    """This function prepares the message for sending, and applies
     a series of rules to determine whether the message should be
     sent out of not.  If it deems that it should, it does!
+
+    Args:
+        message (dict): _description_
+        settings (dict): _description_
     """
 
     print(message)
