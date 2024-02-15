@@ -13,11 +13,11 @@ def extract_message(message_text: str, settings: dict) -> dict:
     structured format via the message dictionary, which is returned.
 
     Args:
-        message_text (str): _description_
-        settings (dict): _description_
+        message_text (str): _the raw logfile entry text to be parsed_
+        settings (dict): _the settings dictionary_
 
     Returns:
-        dict: _description_
+        dict: _a dictionary containing the message and associated metadata determined by this function_
     """
 
     # Checking for Message
@@ -78,8 +78,8 @@ def send_to_ntfy(message: dict, endpoint: str) -> None:
     """Send the message, defined in the message dictionary, to the ntf.sh service.
 
     Args:
-        message (dict): _description_
-        endpoint (str): _description_
+        message (dict): _the message dictionary created by extract_message()_
+        endpoint (str): _the ntfy.sh endpoint that the message should be delivered to_
     """
 
     ntfy_headers = {}
@@ -105,8 +105,8 @@ def info_message(infotype: str, settings: dict, **kwargs) -> None:
     These are static, and defined by the infotype parameter.
 
     Args:
-        infotype (str): _description_
-        settings (dict): _description_
+        infotype (str): _a static string to determine which informational message to send_
+        settings (dict): _the settings dictionary_
     """
 
     logfile = kwargs.get("optional", None)
@@ -156,8 +156,8 @@ def send_message(message: dict, settings: dict) -> None:
     sent out of not.  If it deems that it should, it does!
 
     Args:
-        message (dict): _description_
-        settings (dict): _description_
+        message (dict): _the message dictionary created by extract_message()_
+        settings (dict): _the settings dictionary_
     """
 
     print(message)
@@ -169,9 +169,9 @@ def send_message(message: dict, settings: dict) -> None:
 
         # The rules here are a little complex, but to determine whether a message can potentially be sent to a given user:
         #  a. the type needs to contained within the enabled message types within the profile, AND any of:
-        #  x. the target RIC is same as that in the profile, or
-        #  y. the text contains the same callsign as that in the profile, or
-        #  z. the message type is I (information) or E (error)
+        #    x. the target RIC is same as that in the profile, or
+        #    y. the text contains the same callsign as that in the profile, or
+        #    z. the message type is I (information) or E (error)
         if message["type"] in settings["profiles"][profile]["messagetypes"]:
 
             if (

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"Main function, where the magic happens! :)"
+"""Main function, where the magic happens! :)"""
 
 import func_general
 import func_messages

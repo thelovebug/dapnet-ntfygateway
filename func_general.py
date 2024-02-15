@@ -11,10 +11,10 @@ def get_settings(json_file: str) -> dict:
     """Loads the specified settings file into a dictionary.
 
     Args:
-        json_file (str): _description_
+        json_file (str): _the name of the JSON settings file that needs to be loaded_
 
     Returns:
-        dict: _description_
+        dict: _a dictionary containing the JSON settings file_
     """
 
     with open(json_file, encoding="UTF-8") as settings_file:
@@ -27,9 +27,9 @@ def follow(thefile: io.TextIOWrapper, seek_to_end: bool, current_date: str):
     """Generator function that yields new lines in a file.
 
     Args:
-        thefile (io.TextIOWrapper): _description_
-        seek_to_end (bool): _description_
-        current_date (str): _description_
+        thefile (io.TextIOWrapper): _the pointer to the file we just opened_
+        seek_to_end (bool): _determines whether we jump to the end of the file once opened_
+        current_date (str): _today's date, used to determine whether we need to switch to a new log file or not_
 
     Yields:
         _type_: _description_
@@ -63,7 +63,7 @@ def get_current_date() -> str:
     """Very simply, gets the current (UTC) date in ISO8601 format.
 
     Returns:
-        str: _description_
+        str: _the current UTC date in yyyy-mm-dd format_
     """
 
     return datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y-%m-%d")
@@ -77,11 +77,11 @@ def wait_for_todays_file(filename: str, current_date: str) -> bool:
     If it spills over to the next day, the function returns False.
 
     Args:
-        filename (str): _description_
-        current_date (str): _description_
+        filename (str): _the absolute location of the file we're going to be waiting for_
+        current_date (str): _today's date, used to determine whether we need to switch to a new log file or not_
 
     Returns:
-        bool: _description_
+        bool: _True if the file has appeared, False if the file hasn't appeared and it's now the next day_
     """
 
     file_exists = False
